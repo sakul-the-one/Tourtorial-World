@@ -35,7 +35,7 @@ namespace LGCON {
         {
             foreach (KeyValuePair<string, string> st in saved) 
             {
-                Debug.Log(st.Key+ " => "+ st.Value);
+                Debug.Log(st.Key+ " : "+ st.Value);
             }
         }
         public string GetVariable(string VarName) 
