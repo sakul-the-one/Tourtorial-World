@@ -18,8 +18,7 @@ public class SaveScript1 : MonoBehaviour
         {
         "Name: Sakul",
         "Age: 1001",
-        "Health: 2001",
-        "School: Boring"
+        "Health: 2001"
         };
 
         SaveScript t = new SaveScript();
@@ -29,6 +28,6 @@ public class SaveScript1 : MonoBehaviour
         t.Log();
         Debug.Log("............................................");
         Debug.Log(t.GetVariable("Name"));
-        Debug.Log(t.GetVariable("TT"));
+        Debug.Log(t.GetVariable("Name..zug"));
     }
 }
