@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
 using LGCON;
-using System.Text;
+using UnityEngine;
 using System;
 
 public class SaveScript1 : MonoBehaviour
 {
     public GameObject HousePrefarb;
-    SaveScript ss = new SaveScript("D:\\T.LGCon");
+    SaveScript saver = new SaveScript("D:\\T.LGCon");
 
-    public void SaveUI() 
+    public void SaveUI()
     {
         GameObject[] Houses = GameObject.FindGameObjectsWithTag("House");
 
@@ -20,30 +16,33 @@ public class SaveScript1 : MonoBehaviour
          "len:" + Houses.Length
         };
 
-        ss.Write(mes);
+        saver.Write(mes);
 
-        for (int i =0; i<Houses.Length; i++) 
+        for (int i = 0; i < Houses.Length; i++)
         {
             Houses[i].SendMessage("Save", i);
         }
     }
+
     public void LoadUI()
     {
         //Destroy Old
         GameObject[] Houses = GameObject.FindGameObjectsWithTag("House");
-        ss.Read();
-        foreach (GameObject G in Houses) 
+
+        foreach (GameObject G in Houses)
         {
             Destroy(G);
         }
+
         //Load New
-        for (int i = 0; i <= Convert.ToInt32(ss.GetVariable("len")) - 1; i++)
+        saver.Read();
+        for (int i = 0; i <= Convert.ToInt32(saver.GetVariable("len")) - 1; i++)
         {
             try
             {
-                float x = Convert.ToSingle(ss.GetVariable("T" + i, "x"));
-                float y = Convert.ToSingle(ss.GetVariable("T" + i, "y"));
-                float z = Convert.ToSingle(ss.GetVariable("T" + i, "z"));
+                float x = Convert.ToSingle(saver.GetVariable("T" + i, "x"));
+                float y = Convert.ToSingle(saver.GetVariable("T" + i, "y"));
+                float z = Convert.ToSingle(saver.GetVariable("T" + i, "z"));
 
                 GameObject House = Instantiate(HousePrefarb, new Vector3(x, y, z), transform.rotation);
                 House.name = "T" + i;
